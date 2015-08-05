@@ -10,12 +10,12 @@
 #define CHAN               0         // pi's SPI channel	
 
 //define the crotrl GPIO of ad7606
-#define AD_RESET_PIN       0 
-#define AD_CONVST_PIN      1
-#define AD_RANGE_PIN       2
-#define AD_OS0_PIN         3
-#define AD_OS1_PIN         4
-#define AD_OS2_PIN	       5
+#define AD_RESET_PIN       26 
+#define AD_CONVST_PIN      23
+#define AD_RANGE_PIN       25
+#define AD_OS0_PIN         28
+#define AD_OS1_PIN         29
+#define AD_OS2_PIN	       27
 //songme useful option
 //#define AD_CS_LOW          digitalWrite(AD_CS_PIN,0)
 //#define AD_CS_HIGH         digitalWrite(AD_CS_PIN,1)

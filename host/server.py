@@ -4,10 +4,12 @@ import threading
 
 class ThreadedTCPRequestHandler(ss.BaseRequestHandler):
 	def handle(self):
-		data = str(self.request.recv(1024),'ascii')
-		cur_thread = threading.current_thread()
-		response = bytes("{}:{}".format(cur_thread.name,dta),'ascii')
-		self.request.sendall(response)
+		addr = self.request.getpeername()
+		print("Got connect from",addr)
+		res = bytes("Thanks",'ascii')
+		data1 = 2
+		self.request.send(res)
+		print("Thread: ",data1)
 
 class ThreadedTCPServer(ss.ThreadingMixIn,ss.TCPServer):
 	pass
@@ -18,14 +20,17 @@ if __name__ == "__main__":
 
 	server = ThreadedTCPServer((HOST,PORT),ThreadedTCPRequestHandler)
 	ip,port = server.server_address
+	data1 = 0
 
 	server_thread = threading.Thread(target=server.serve_forever)
 	server_thread.daemon = True
 	server_thread.start()
+	print("mainloop:",data1)
 	print("Server loop running in thread",server_thread.name)
 	try:
 		while(True):
 			pass
 	except KeyboardInterrupt:
 		server.shutdown()
+		print("end: ",data1)
 		print("server quit")

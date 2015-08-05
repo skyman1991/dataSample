@@ -33,9 +33,12 @@ void pi_Init(u32 _spispeed)  // danwei kHz
 		exit(-1);
 	}
 
-	for(i = 0; i < 6; i++) {
-		pinMode(i,OUTPUT);
-	}
+	pinMode(AD_OS0_PIN,OUTPUT);
+	pinMode(AD_OS1_PIN,OUTPUT);
+	pinMode(AD_OS2_PIN,OUTPUT);
+	pinMode(AD_RESET_PIN,OUTPUT);
+	pinMode(AD_CONVST_PIN,OUTPUT);
+	pinMode(AD_RANGE_PIN,OUTPUT);
 }
 
 /**********************************************
