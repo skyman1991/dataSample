@@ -1,9 +1,10 @@
-testmain.out: testmain.o test.o
-	gcc -o ./out/testmain.out testmain.o test.o
-testmain.o: testmain.c test.h
-	gcc -c testmain.c
+vpath %.c ./src
+vpath %.o ./obj
+vpath %.h ./include 
+main: test.o
+	gcc -o ./bin/main obj/test.o
 test.o: test.c test.h
-	gcc -c test.c
+	gcc -c ./src/test.c -o obj/test.o
 
 .PHONY: clean
 clean:

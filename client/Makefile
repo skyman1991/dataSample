@@ -1,6 +1,6 @@
 obj = main.o ad7606.o data.o
 objects = obj/main.o obj/ad7606.o obj/data.o
-header = ad7606.h data.h
+header = ./include/ad7606.h ./include/data.h
 CFLAGS = -g -I ./include
 
 vpath %.c ./src
@@ -8,7 +8,7 @@ vpath %.h ./include
 vpath %.o ./obj
 
 main: $(obj)
-	gcc $(objects) -o bin/main -lwiringPi -lapue
+	gcc $(objects) -o ./bin/main -lwiringPi -lapue
 main.o: $(header)
 	gcc -c $(CFLAGS) ./src/main.c -o obj/main.o
 ad7606.o: $(header)
