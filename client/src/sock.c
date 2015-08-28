@@ -3,9 +3,12 @@
 #include <sys/socket.h>
 #include <linux/in.h>
 
-#define MAXSLEEP 128  //socket retry sleep time
+#define MAXSLEEP   128         //socket retry sleep time
+#define SERVER     "127.0.0.1" //server ip
+#define PORT       8888        //socket port
 
-static int connect_retry(int sockfd,const struct sockaddr *addr,socklen_t alen) 
+static int 
+connect_retry(int sockfd,const struct sockaddr *addr,socklen_t alen) 
 {
 	int numsec;
 	for (numsec = 1; numsec <= MAXSLEEP; numsec <<= 1) {
@@ -26,12 +29,12 @@ static int connect_retry(int sockfd,const struct sockaddr *addr,socklen_t alen)
  *			  port: socket port
  * return: 0: sucess  -1: error
  * ******************************************/
-int socket_init(char *pserverip,unsigned short port)
+int socket_init()
 {
 	int sockfd;
 	struct sockaddr_in s_add;
-	unsigned short portnum = port;
-	char *server_ip = pserverip;
+	unsigned short portnum = PORT;
+	char *server_ip = SERVER;
 
 	if((sockfd = socket(AF_INET,SOCK_STREAM,0)) == -1) {
 		err_sys("socket failed!");
