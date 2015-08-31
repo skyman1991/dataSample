@@ -1,13 +1,10 @@
 #include "../include/sock.h"
-#include "apue.h"
-#include <sys/socket.h>
-#include <linux/in.h>
 
 #define MAXSLEEP   128         //socket retry sleep time
 #define SERVER     "127.0.0.1" //server ip
 #define PORT       8888        //socket port
 
-static int 
+int 
 connect_retry(int sockfd,const struct sockaddr *addr,socklen_t alen) 
 {
 	int numsec;

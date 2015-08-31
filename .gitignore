@@ -1,2 +1,1 @@
-./client/obj/*.o
-./test
+./client/obj/*

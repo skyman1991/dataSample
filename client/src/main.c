@@ -3,12 +3,18 @@
 #include <fcntl.h>
 #include "../include/ad7606.h"
 #include "../include/data.h"
+#include "../include/sock.h"
 
 int main()
 {
 	int pid;
 	int fd1,fd2;
+	int sockfd;
 	int i = 0;
+
+#if SOCKET
+	sockfd = socket_init();
+#else
 	if((fd1 = open("../data/data1.txt",O_RDWR|O_CREAT,S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)) < 0){
 		err_sys("open file1 error");
 		exit(-1);
@@ -17,67 +23,24 @@ int main()
 		err_sys("open file2 error");
 		exit(-1);
 	}
+#endif
+
 	pi_Init(5000);
 	pi_InitAD7606();	
 	pi_InitSignal();
 	ad7606_StartRecord(1000);
-// printf("hello world\n");	
+
 	while(1)
 	{		
-		//printf("nihao\n");
+#if SOCKET
 		if(full_flag == 1) {
-	//	printf("nihao\n");
-			if(file_flag == 0) {
-				pid = fork();
-	//			printf("hello\n");
-				if(pid < 0)
-					err_sys("write fork error");
-				else if(pid == 0){
-					printf("write 1\n");
-					data_write(fd1);
-					exit(0);
-				}
-				else {
-					if((pid = fork()) < 0) {
-						err_sys("read fork error");
-					}
-					else if(pid == 0) {
-						printf("read 1\n");
-						data_read(fd2);
-						exit(0);
-					}
-					else {
-						full_flag = 0;
-					}
-				}
-			}
-			else if(file_flag == 1) {
-//				printf("world\n");
-				if((pid = fork()) < 0)
-					err_sys("write fork error");
-				else if(pid == 0){
-					printf("write 2\n");
-					data_write(fd2);
-					exit(0);
-				}
-				else {
-					if((pid = fork()) < 0) {
-						err_sys("read fork error");
-					}
-					else if(pid == 0) {
-						printf("read 2\n");
-						data_read(fd1);
-						exit(0);
-					}
-					else {
-						full_flag = 0;
-					}
-				}			
-			}
+			data_process(sockfd);
 		}
+#else
+		if(full_flag == 1) {
+			data_process(fd1,fd2,file_flag);
+		}
+#endif
 	}
-
-//	close(fd1);
-//	close(fd2);
-return 0;
+	return 0;
 }
