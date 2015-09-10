@@ -5,7 +5,7 @@
 #include <sys/socket.h>
 #include <linux/in.h>
 
-#define SOCKET 0
+#define SOCKET 1
 
 extern int socket_init();
 

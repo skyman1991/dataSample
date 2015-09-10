@@ -52,9 +52,9 @@ void data_read(int _fd)
 	}
 }
 #if SOCKET
-void data_process(int sockefd)
+void data_process(int sockfd)
 {
-
+	send(sockfd,g_tAD.usBuf,FIFO_SIZE,0);
 }
 #else
 void data_process(int fd1,int fd2, int fileflag)
