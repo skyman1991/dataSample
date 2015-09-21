@@ -15,8 +15,11 @@ int main()
 
 #if SOCKET
 	sockfd = socket_init();
-	//send(sockfd,s,12,0);
-	printf("done\n");
+	if(sockfd == -1){
+		printf("socket init faild\n");
+		return -1;
+	}
+	printf("socket client is working\n");
 #else
 	if((fd1 = open("../data/data1.txt",O_RDWR|O_CREAT,S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)) < 0){
 		err_sys("open file1 error");

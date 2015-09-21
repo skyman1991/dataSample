@@ -1,7 +1,7 @@
 #include "../include/sock.h"
 
 #define MAXSLEEP   128         //socket retry sleep time
-#define SERVER     "10.160.8.89" //server ip
+#define SERVER     "192.168.191.1" 
 #define PORT       8888        //socket port
 
 int 
