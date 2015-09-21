@@ -1,7 +1,7 @@
 #include "../include/sock.h"
 
 #define MAXSLEEP   128         //socket retry sleep time
-#define SERVER     "127.0.0.1" //server ip
+#define SERVER     "10.160.8.89" //server ip
 #define PORT       8888        //socket port
 
 int 
@@ -47,6 +47,6 @@ int socket_init()
 		err_sys("connect failed!");
 		return -1;
 	}
-	return 0;
+	return sockfd;
 }
 

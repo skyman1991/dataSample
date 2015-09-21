@@ -11,9 +11,12 @@ int main()
 	int fd1,fd2;
 	int sockfd;
 	int i = 0;
+	//char s[12] = "hello world";
 
 #if SOCKET
 	sockfd = socket_init();
+	//send(sockfd,s,12,0);
+	printf("done\n");
 #else
 	if((fd1 = open("../data/data1.txt",O_RDWR|O_CREAT,S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)) < 0){
 		err_sys("open file1 error");

@@ -55,6 +55,7 @@ void data_read(int _fd)
 void data_process(int sockfd)
 {
 	send(sockfd,g_tAD.usBuf,FIFO_SIZE,0);
+	//write(sockfd,"hello world\n",12);
 }
 #else
 void data_process(int fd1,int fd2, int fileflag)
