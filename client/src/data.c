@@ -6,7 +6,7 @@ int enter_flag = 0;
 
 int file_flag = 1; //which file to write
 
-u8 packet_data[FIFO_SIZE + 12] //payload + other 12
+u8 packet_data[FIFO_SIZE + 12]; //payload + other 12
 
 /*
    void data_process()
@@ -111,13 +111,14 @@ void data_process(int fd1,int fd2, int fileflag)
 
 int packet_init(u8 type,u8 address,u8 channel,u8 pac_num)
 {
+	int i;
 	time_t now;
 	time(&now); //get current time
 
 	packet_data[0] = 0x7e;
 	packet_data[1] = (u8)((FIFO_SIZE + 8) >> 8); //lengh high 8
 	packet_data[2] = (u8)(FIFO_SIZE + 8);
-	packet-data[3] = type;
+	packet_data[3] = type;
 	packet_data[4] = address;
 	packet_data[5] = channel;
 	packet_data[6] = pac_num;
